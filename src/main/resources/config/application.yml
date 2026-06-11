@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: payment-system
+  webflux:
+    base-path: /api
+  resilience4j:
+    circuitbreaker:
+      configs:
+        default:
+          registerHealthIndicator: true
+          slidingWindowSize: 10
+          failureRateThreshold: 50
+          waitDurationInOpenState: 10000
+          automaticTransitionFromOpenToHalfOpenEnabled: true
+      instances:
+        paymentService:
+          config: default
